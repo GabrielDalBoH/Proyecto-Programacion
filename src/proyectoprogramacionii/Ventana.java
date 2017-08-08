@@ -11,9 +11,10 @@ package proyectoprogramacionii;
  */
 public class Ventana {
 
-    public static void main(String[] args) {    
+    public static void main(String[] args) {
         VentanaTrabajo ventana = new VentanaTrabajo();
         ventana.setVisible(true);
+
     }
 
 }
