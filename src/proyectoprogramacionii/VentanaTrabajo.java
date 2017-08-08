@@ -12,12 +12,23 @@ import java.util.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.*;
 import net.sourceforge.jdatepicker.impl.*;
 import net.sourceforge.jdatepicker.util.*;
 
 //import Atxy2k.CustomTextField.RestrictedTextField;
-public class VentanaTrabajo extends JFrame implements ActionListener{
+public class VentanaTrabajo extends JFrame implements ActionListener {
+
+    private static String nombre_;
+    private static String apellido_;
+    private static String nacimiento_;
+    private static String sexo_;
+    private static String domicilio_;
+    private static String nacionalidad_;
+    private static String ciudad_;
+    private static String lugardenacimiento_;
 
     //Font titleFont = new Font("Dialog", Font.BOLD, 18);
     JPanel paneltitulo = new JPanel(new GridLayout(1, 3, 1, 1));
@@ -30,6 +41,7 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
     JPanel panelimg = new JPanel(null);
 
     JPanel grillaDatos = new JPanel(new GridLayout(9, 2, 1, 1));
+    JPanel btns = new JPanel(new GridLayout(1, 2, 1, 1));
 
     //Creamos Labels
     JLabel nombre = new JLabel("Nombre: ");
@@ -41,11 +53,17 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
     JLabel ciudad = new JLabel("Ciudad: ");
     JLabel nacimiento = new JLabel("Lugar de Nacimiento: ");
     //JLabel invisible = new JLabel();
-
+    
+    public UtilDateModel model;
+    public JDatePanelImpl datePanel;
+    public JDatePickerImpl datePicker;
+    
+    
     //Botones
     JButton btnAceptar = new JButton("Aceptar");
+    JButton btnFoto = new JButton("Tomar Foto");
+    JButton btnFirma = new JButton("Firma");
 
-    
     //ComboBox
     JComboBox pais = new JComboBox(this.paises());
 
@@ -59,24 +77,31 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
     JTextField txtCiudad = new JTextField(20);
     JTextField txtNacimiento = new JTextField(20);
 
-/*
+    /*
     public void addAction(){
     btnAceptar.setActionCommand("Aceptar");
     btnAceptar.addActionListener(this);
    }
-    */
+     */
 
-/*
+ /*
     @Override
     public void actionPerformed(ActionEvent ae) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     
-    }
-    
+    }*/
+ /*
     public class Imagen extends javax.swing.JPanel {
 
         public Imagen() {
-            this.setSize(50, 100); //se selecciona el tamaño del panel
+            this.setSize(50,  public class selectDate extends JFrame implements ActionListener
+    {
+    JLabel CheckDate; JButton check;
+    public UtilDateModel model;
+    public JDatePanelImpl datePanel;
+    public JDatePickerImpl datePicker;
+    public selectDate()
+        { 100); //se selecciona el tamaño del panel
         }
 
         //Se crea un método cuyo parámetro debe ser un objeto Graphics
@@ -94,14 +119,13 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
         }
     
     }*/
-
     public VentanaTrabajo() {
         super("Documentacion ");
-        setSize(100, 100);
+        //setSize(100, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         this.setResizable(false);
         //setUndecorated(true);
-        
 
         //titulo.setFont( new Font( "Helvetica", Font.BOLD, 36 ));
         titulo.setFont(new java.awt.Font("TimesRoman", Font.BOLD, 36));
@@ -110,16 +134,25 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
         JPanel panelgeneral = new JPanel();
         panelgeneral.setLayout(new BoxLayout(panelgeneral, BoxLayout.Y_AXIS));
         panelgeneral.setBorder(new EmptyBorder(4, 4, 4, 4));
-
+/*
         UtilDateModel model = new UtilDateModel();
         model.setSelected(true);
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+*/
+        btnAceptar.setActionCommand("Aceptar");
+        btnAceptar.addActionListener(this);
 
-            btnAceptar.setActionCommand("Aceptar");
-            btnAceptar.addActionListener(this);
+        model = new UtilDateModel();  
+        datePanel = new JDatePanelImpl(model);  
+        datePicker = new JDatePickerImpl(datePanel);
         
-       /*btnAceptar.addActionListener(
+        
+        btnFirma.setActionCommand("Firma");
+        btnFirma.addActionListener(this);
+
+        //btnFirma.addActionListener(new BotonFirmar());
+        /*btnAceptar.addActionListener(
                 new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
                 VentanaTrabajo.dispose();
@@ -129,7 +162,7 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
             }
         });*/
 
-        /*btnBandera.addActionListener(
+ /*btnBandera.addActionListener(
                 new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
                 Imagen img = new Imagen();
@@ -144,7 +177,8 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
         nombre.setBounds(1, 1, 1, 1);
 
         //Imagen image = new Imagen();
-
+        btns.add(btnFoto);
+        btns.add(btnFirma);
         //setContentPane(image);
         grillaDatos.add(nombre);
         grillaDatos.add(txtNombre);
@@ -162,21 +196,21 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
         grillaDatos.add(txtCiudad);
         grillaDatos.add(nacimiento);
         grillaDatos.add(txtNacimiento);
-        grillaDatos.add(invisible1);
+        grillaDatos.add(btns);
         grillaDatos.add(btnAceptar);
 
         //panelimg.add(image);
-
         paneltitulo.add(invisible);
         paneltitulo.add(titulo);
-        paneltitulo.add(panelimg);
+        //paneltitulo.add(panelimg);
 
         panelgeneral.add(paneltitulo);
         panelgeneral.add(grillaDatos);
-        //panelgeneral.add(panelimg);
+        //panelgeneral.add(image);
         add(panelgeneral);
         pack();
     }
+    
 
     private String[] paises() {
 
@@ -201,11 +235,100 @@ public class VentanaTrabajo extends JFrame implements ActionListener{
         aux = countries.toArray(aux);
         return aux;
     }
-    public void actionPerformed(ActionEvent e){
-        if(e.getActionCommand().equals("Aceptar")){
-            System.out.println("xd");
+
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getActionCommand().equals("Aceptar")) {
+            setNombre(txtNombre.getText());
+            setApellido(txtApellido.getText());
+            setSexo(boxSexo.getSelectedItem().toString());
+            setNacimiento(datePicker.getModel().getValue().toString());
+            setDomicilio(txtDomicilio.getText());
+            setCiudad(txtCiudad.getText());
+            setLugarDeNacimiento(txtNacimiento.getText());
+            setNacionalidad(pais.getSelectedItem().toString());
+            
             this.dispose();
-}
-    
+            Dni ventanaDni = new Dni();
+            ventanaDni.setVisible(true);
+        } else if (e.getActionCommand().equals("Firma")) {
+            dispose();
+            System.out.println("gola");
+            Dibujar ventanaDibujar = new Dibujar();
+            ventanaDibujar.setVisible(true);
+
+        }
     }
-}
+
+    /*        
+    public class BotonFirmar implements ActionListener{
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if (e.getActionCommand().equals("Firma")){
+            System.out.println("dd");
+            dispose();
+        Dibujar ventanaDibujar = new Dibujar();
+        ventanaDibujar.setVisible(true);
+        }
+    }
+    }*/
+
+    public void setNombre(String nombre_) {
+        this.nombre_ = nombre_;
+    }
+
+    public static String getNombre() {
+        return nombre_;
+    }
+
+    public void setApellido(String apellido_) {
+        this.apellido_ = apellido_;
+    }
+
+    public static String getApellido() {
+        return apellido_;
+    }
+
+    public void setSexo(String sexo_) {
+        this.sexo_ = sexo_;
+    }
+
+    public static String getSexo() {
+        return sexo_;
+    }
+    public void setNacimiento(String nacimiento_) {
+        this.nacimiento_ = nacimiento_;
+    }
+
+    public static String getNacimiento() {
+        return nacimiento_;
+    }
+    public void setDomicilio(String domicilio_) {
+        this.domicilio_ = domicilio_;
+    }
+
+    public static String getDomicilio() {
+        return domicilio_;
+    }
+    public void setCiudad(String ciudad_) {
+        this.ciudad_ = ciudad_;
+    }
+
+    public static String getCiudad() {
+        return ciudad_;
+    }
+    public void setLugarDeNacimiento(String lugardenacimiento_) {
+        this.lugardenacimiento_ = lugardenacimiento_;
+    }
+
+    public static String getLugarDeNacimiento() {
+        return lugardenacimiento_;
+    }
+    public void setNacionalidad(String nacionalidad_) {
+        this.nacionalidad_ = nacionalidad_;
+    }
+
+    public static String getNacionalidad() {
+        return nacionalidad_;
+    }
+    }
