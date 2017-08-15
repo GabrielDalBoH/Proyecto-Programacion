@@ -24,8 +24,7 @@ public class Dni extends javax.swing.JFrame {
     public Dni() {
         initComponents();
         setLocationRelativeTo(null);
-        //setUndecorated(true);
-        
+
         btnVoltear.setActionCommand("Girar");
         btnVoltear.setText("Girar");
         lblNombre.setText(VentanaTrabajo.getNombre());
@@ -36,6 +35,9 @@ public class Dni extends javax.swing.JFrame {
         
         
         panelFoto.add(userImg);
+        dispose();
+        setUndecorated(true);
+        setVisible(true);
     }
 
 
@@ -189,7 +191,6 @@ public class Dni extends javax.swing.JFrame {
         if (evt.getActionCommand().equals("Girar")) {
             dispose();
             Dni2 dni2 = new Dni2();
-            dni2.setVisible(true);
     }//GEN-LAST:event_btnVoltearActionPerformed
     }
     /**

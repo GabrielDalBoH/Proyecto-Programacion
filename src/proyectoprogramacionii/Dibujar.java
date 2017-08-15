@@ -19,7 +19,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -41,6 +45,10 @@ public class Dibujar extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
         btnBorrar.setActionCommand("Borrar");
+        btnBorrar.addActionListener(this);
+        
+        btnAceptar.setActionCommand("Aceptar");
+        btnAceptar.addActionListener(this);
 
         addMouseListener(new MouseAdapter() {
 
@@ -74,10 +82,29 @@ public class Dibujar extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Borrar")) {
-            System.out.println("gola");
             dispose();
-            Dni ventanaDni = new Dni();
-            ventanaDni.setVisible(true);
+            Dibujar ventanaD = new Dibujar();
+            ventanaD.setVisible(true);
+
+        }
+        else if (e.getActionCommand().equals("Aceptar")) {
+            
+                BufferedImage bImg = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
+    Graphics2D cg = bImg.createGraphics();
+    panel.paintAll(cg);
+    try {
+            if (ImageIO.write(bImg, "png", new File("/home/gino/Escritorio/Proyecto Programacion/firma.png")))
+            {
+                System.out.println("-- saved");
+            }
+    } catch (IOException a) {
+            // TODO Auto-generated catch block
+            a.printStackTrace();
+    }
+            
+            //dispose();
+            //VentanaTrabajo ventana = new VentanaTrabajo();
+            //ventana.setVisible(true);
 
         }
     }
@@ -92,6 +119,14 @@ public class Dibujar extends JFrame implements ActionListener {
 
     private Line2D.Float crearLinea(int x1, int y1, int x2, int y2) {
         return new Line2D.Float(x1, y1, x2, y2);
+    }
+    public static void main(String[] a3d) {
+        JFrame ventana = new JFrame("Dibujar");
+        ventana.setSize(400, 300);
+        ventana.setLocationRelativeTo(null);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.add(new Dibujar());
+        ventana.setVisible(true);
     }
 
 }

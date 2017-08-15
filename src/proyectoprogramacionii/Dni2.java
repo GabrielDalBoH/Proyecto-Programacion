@@ -24,6 +24,10 @@ public class Dni2 extends javax.swing.JFrame {
         lblCiudad.setText(VentanaTrabajo.getCiudad());
         lblLugarNacimiento.setText(VentanaTrabajo.getLugarDeNacimiento());
         lblNacionalidad.setText(VentanaTrabajo.getNacionalidad());
+
+        dispose();
+        setUndecorated(true);
+        setVisible(true);
     }
 
     /**

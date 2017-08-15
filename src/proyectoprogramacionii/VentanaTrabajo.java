@@ -18,6 +18,8 @@ import javax.swing.*;
 import net.sourceforge.jdatepicker.impl.*;
 import net.sourceforge.jdatepicker.util.*;
 
+
+
 //import Atxy2k.CustomTextField.RestrictedTextField;
 public class VentanaTrabajo extends JFrame implements ActionListener {
 
@@ -125,7 +127,7 @@ public class VentanaTrabajo extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         this.setResizable(false);
-        //setUndecorated(true);
+        setUndecorated(true);
 
         //titulo.setFont( new Font( "Helvetica", Font.BOLD, 36 ));
         titulo.setFont(new java.awt.Font("TimesRoman", Font.BOLD, 36));
@@ -150,6 +152,9 @@ public class VentanaTrabajo extends JFrame implements ActionListener {
         
         btnFirma.setActionCommand("Firma");
         btnFirma.addActionListener(this);
+        
+        btnFoto.setActionCommand("Foto");
+        btnFoto.addActionListener(this);
 
         //btnFirma.addActionListener(new BotonFirmar());
         /*btnAceptar.addActionListener(
@@ -246,11 +251,10 @@ public class VentanaTrabajo extends JFrame implements ActionListener {
             setDomicilio(txtDomicilio.getText());
             setCiudad(txtCiudad.getText());
             setLugarDeNacimiento(txtNacimiento.getText());
-            setNacionalidad(pais.getSelectedItem().toString());
-            
+            setNacionalidad(pais.getSelectedItem().toString()); 
             this.dispose();
             Dni ventanaDni = new Dni();
-            ventanaDni.setVisible(true);
+            
         } else if (e.getActionCommand().equals("Firma")) {
             dispose();
             System.out.println("gola");
@@ -258,11 +262,18 @@ public class VentanaTrabajo extends JFrame implements ActionListener {
             ventanaDibujar.setVisible(true);
 
         }
+        else if (e.getActionCommand().equals("Foto")) {
+            dispose();
+            System.out.println("gola");
+            SwingUtilities.invokeLater(new WebcamViewerExample());
+        }
     }
 
-    /*        
+    /*        setBounds(getGraphicsConfiguration().getBounds());
+getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
     public class BotonFirmar implements ActionListener{
-    @Override
+    @OverridesetBounds(getGraphicsConfiguration().getBounds());
+getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
     public void actionPerformed(ActionEvent e){
         if (e.getActionCommand().equals("Firma")){
             System.out.println("dd");
