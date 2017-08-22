@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoprogramacionii;
+package pruebas;
 
+import pruebas.Dibujar;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -17,12 +18,15 @@ import java.text.SimpleDateFormat;
 import javax.swing.*;
 import net.sourceforge.jdatepicker.impl.*;
 import net.sourceforge.jdatepicker.util.*;
+import proyectoprogramacionii.Dni;
+import proyectoprogramacionii.Persona;
+import proyectoprogramacionii.WebcamViewerExample;
 
 
 
 //import Atxy2k.CustomTextField.RestrictedTextField;
 public class VentanaTrabajo extends JFrame implements ActionListener {
-
+/*
     private static String nombre_;
     private static String apellido_;
     private static String nacimiento_;
@@ -30,7 +34,7 @@ public class VentanaTrabajo extends JFrame implements ActionListener {
     private static String domicilio_;
     private static String nacionalidad_;
     private static String ciudad_;
-    private static String lugardenacimiento_;
+    private static String lugardenacimiento_;*/
 
     //Font titleFont = new Font("Dialog", Font.BOLD, 18);
     JPanel paneltitulo = new JPanel(new GridLayout(1, 3, 1, 1));
@@ -244,14 +248,15 @@ public class VentanaTrabajo extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Aceptar")) {
-            setNombre(txtNombre.getText());
-            setApellido(txtApellido.getText());
-            setSexo(boxSexo.getSelectedItem().toString());
-            setNacimiento(datePicker.getModel().getValue().toString());
-            setDomicilio(txtDomicilio.getText());
-            setCiudad(txtCiudad.getText());
-            setLugarDeNacimiento(txtNacimiento.getText());
-            setNacionalidad(pais.getSelectedItem().toString()); 
+            Persona persona = new Persona();
+            persona.setNombre(txtNombre.getText());
+            persona.setApellido(txtApellido.getText());
+            persona.setSexo(boxSexo.getSelectedItem().toString());
+            persona.setNacimiento(datePicker.getModel().getValue().toString());
+            persona.setDomicilio(txtDomicilio.getText());
+            persona.setCiudad(txtCiudad.getText());
+            persona.setLugarDeNacimiento(txtNacimiento.getText());
+            persona.setNacionalidad(pais.getSelectedItem().toString()); 
             this.dispose();
             Dni ventanaDni = new Dni();
             
@@ -283,7 +288,7 @@ getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
         }
     }
     }*/
-
+/*
     public void setNombre(String nombre_) {
         this.nombre_ = nombre_;
     }
@@ -341,5 +346,5 @@ getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
 
     public static String getNacionalidad() {
         return nacionalidad_;
-    }
+    }*/
     }

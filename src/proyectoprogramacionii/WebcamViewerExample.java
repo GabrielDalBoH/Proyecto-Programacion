@@ -20,6 +20,7 @@ import com.github.sarxos.webcam.WebcamListener;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamPicker;
 import com.github.sarxos.webcam.WebcamResolution;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -39,7 +40,10 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
     private Webcam webcam = null;
     private WebcamPanel panel = null;
     private WebcamPicker picker = null;
+    JPanel layout = new JPanel(new GridLayout(1,2,1,1));
+    
     private JButton boton = new JButton("Sacar foto");
+    private JButton botonVlv = new JButton("Volver");
 
     @Override
     public void run() {
@@ -68,10 +72,16 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
         panel = new WebcamPanel(webcam, false);
         panel.setFPSDisplayed(true);
 
+        layout.add(boton);
+        layout.add(botonVlv);
         add(picker, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
-        add(boton, BorderLayout.SOUTH);
+        add(layout, BorderLayout.SOUTH);
         boton.addActionListener(this);
+        
+        
+        botonVlv.setActionCommand("Volver");
+        botonVlv.addActionListener(this);
 
         pack();
         setVisible(true);
@@ -216,6 +226,11 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
             
             e1.printStackTrace();
         }}
+               else if (ev.getSource() == botonVlv) {
+                    dispose();
+                    IngresarDatos ventana = new IngresarDatos();
+                    ventana.setVisible(true);
+        }
         // get image
 
     }

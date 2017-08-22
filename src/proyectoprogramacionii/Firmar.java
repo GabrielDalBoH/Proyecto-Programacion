@@ -26,6 +26,7 @@ import javax.imageio.ImageIO;
  * @author gino
  */
 public class Firmar extends javax.swing.JFrame {
+
     private Point inicioArrastre;
     private Point finArrastre;
     private ArrayList<Shape> lineas = new ArrayList<Shape>();
@@ -35,7 +36,10 @@ public class Firmar extends javax.swing.JFrame {
      */
     public Firmar() {
         initComponents();
-        
+
+        //Color JPanel
+        panelGeneral.setBackground(Color.RED);
+
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) { // cuando se presiona el mouse
                 inicioArrastre = new Point(e.getX(), e.getY());
@@ -60,14 +64,14 @@ public class Firmar extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
         lineas.forEach(g2::draw // dibuja todos las elipses
         );
     }
+
     private Line2D.Float crearLinea(int x1, int y1, int x2, int y2) {
         return new Line2D.Float(x1, y1, x2, y2);
     }
@@ -156,14 +160,9 @@ public class Firmar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        /*dispose();
-        new Firmar().setVisible(true);
-        /*System.out.println(lineas);
+        panelGeneral.repaint();
+        panelFirma.repaint();
         lineas.clear();
-        System.out.println(lineas);*/
-        repaint();
-       /* panelFirma.repaint();
-        panelGeneral.repaint();*/
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -171,15 +170,18 @@ public class Firmar extends javax.swing.JFrame {
         Graphics2D cg = bImg.createGraphics();
         panelFirma.paintAll(cg);
         try {
-                if (ImageIO.write(bImg, "png", new File("/home/gino/Escritorio/Proyecto Programacion/firma.png")))
-                {
-                    System.out.println("-- saved");
-                }
+            if (ImageIO.write(bImg, "png", new File("/home/gino/Escritorio/Proyecto Programacion/firma.png"))) {
+                System.out.println("-- saved");
+            }
         } catch (IOException a) {
-                // TODO Auto-generated catch block
-                a.printStackTrace();
+            // TODO Auto-generated catch block
+            a.printStackTrace();
 
         }
+
+        dispose();
+        IngresarDatos ventana = new IngresarDatos();
+        ventana.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

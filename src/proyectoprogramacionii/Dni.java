@@ -19,19 +19,21 @@ import net.sourceforge.jdatepicker.util.*;
 
 public class Dni extends javax.swing.JFrame {
     
-    private Image userImg = new Image("person.png");
+    private Image userImg = new Image("recorte de test.jpg");
     
     public Dni() {
         initComponents();
         setLocationRelativeTo(null);
 
+        
+        
         btnVoltear.setActionCommand("Girar");
         btnVoltear.setText("Girar");
-        lblNombre.setText(VentanaTrabajo.getNombre());
-        lblApellido.setText(VentanaTrabajo.getApellido());
-        lblSexo.setText(VentanaTrabajo.getSexo());
-        lblFechaDeNacimiento.setText(VentanaTrabajo.getNacimiento());
-        lblDomicilio.setText(VentanaTrabajo.getDomicilio());
+        lblNombre.setText(Persona.getNombre());
+        lblApellido.setText(Persona.getApellido());
+        lblSexo.setText(Persona.getSexo());
+        lblFechaDeNacimiento.setText(Persona.getNacimiento());
+        lblDomicilio.setText(Persona.getDomicilio());
         
         
         panelFoto.add(userImg);
@@ -93,7 +95,7 @@ public class Dni extends javax.swing.JFrame {
         lblNombre1.setFont(new java.awt.Font("Noto Sans CJK JP Black", 2, 18)); // NOI18N
         lblNombre1.setText("Nombre / Name:");
 
-        panelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        panelFoto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         javax.swing.GroupLayout panelFotoLayout = new javax.swing.GroupLayout(panelFoto);
         panelFoto.setLayout(panelFotoLayout);
@@ -165,7 +167,7 @@ public class Dni extends javax.swing.JFrame {
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDomicilio)
                     .addComponent(btnVoltear))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +181,8 @@ public class Dni extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -247,7 +250,7 @@ public class Dni extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public class Image extends JPanel{
     
-    String img = "person.png";
+    String img = "recorte de test.jpg";
     public Image(String img){
     this.setSize(179, 155);
     this.img = img;

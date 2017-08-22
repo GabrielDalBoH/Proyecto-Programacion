@@ -21,9 +21,9 @@ public class Dni2 extends javax.swing.JFrame {
         
         btnVoltear2.setActionCommand("Girar2");
         btnVoltear2.setText("Girar");
-        lblCiudad.setText(VentanaTrabajo.getCiudad());
-        lblLugarNacimiento.setText(VentanaTrabajo.getLugarDeNacimiento());
-        lblNacionalidad.setText(VentanaTrabajo.getNacionalidad());
+        lblCiudad.setText(Persona.getCiudad());
+        lblLugarNacimiento.setText(Persona.getLugarDeNacimiento());
+        lblNacionalidad.setText(Persona.getNacionalidad());
 
         dispose();
         setUndecorated(true);

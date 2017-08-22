@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoprogramacionii;
+package pruebas;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -82,9 +82,12 @@ public class Dibujar extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Borrar")) {
+            panel.repaint();
+            lineas.clear();
+            /*
             dispose();
             Dibujar ventanaD = new Dibujar();
-            ventanaD.setVisible(true);
+            ventanaD.setVisible(true);*/
 
         }
         else if (e.getActionCommand().equals("Aceptar")) {

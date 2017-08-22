@@ -13,7 +13,7 @@ package proyectoprogramacionii;
 public class Ventana {
 
     public static void main(String[] args) {
-        VentanaTrabajo ventana = new VentanaTrabajo();
+        IngresarDatos ventana = new IngresarDatos();
         ventana.setVisible(true);
 
     }
