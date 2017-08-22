@@ -7,7 +7,7 @@
 
 ### Ventanas: 
 ### La ventana de ingreso de datos, Su funcion ingresar en los campos correspondientes lo que se pida. 
-### camara Su funcion tomar la foto y guardarla.
+### Camara, Su funcion tomar la foto y guardarla.
 ### La Ventana paint, Su funcion dibujar la firma, poder borrarla o guardarla.
 ### El DNI ya creado Su funcion te devuelve un DNI con los datos que ingresaste.
 
