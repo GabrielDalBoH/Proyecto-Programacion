@@ -14,6 +14,17 @@
 - La Ventana paint, Su funcion dibujar la firma, poder borrarla o guardarla.
 - El DNI ya creado, Su funcion te devuelve un DNI con los datos que ingresaste.
 
+## Dependencias
+- slf4j-api-1.7.2.jar link: http://www.java2s.com/Code/Jar/s/Downloadslf4japi172sourcesjar.htm
+
+- bridj-0.6.2.jar link: http://www.java2s.com/Code/Jar/b/Downloadbridj062linuxonlyjar.htm
+
+- webcam-capture-0.3.10.jar link: http://webcam-capture.sarxos.pl/
+
+- slf4j-simple-1.6.1.jar link: http://www.java2s.com/Code/Jar/s/Downloadslf4jsimple161jar.htm
+
+- jdatepicker-1.3.2.jar link: http://www.java2s.com/Code/Jar/j/Downloadjdatepicker132jar.htm
+
 
 
 
