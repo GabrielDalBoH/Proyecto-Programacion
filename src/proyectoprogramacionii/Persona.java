@@ -21,6 +21,7 @@ public class Persona {
     
     
     
+    
     public void setNombre(String nombre_) {
         this.nombre_ = nombre_;
     }

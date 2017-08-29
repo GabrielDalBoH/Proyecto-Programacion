@@ -5,27 +5,25 @@
  */
 package proyectoprogramacionii;
 
+
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Principal extends JFrame {
+public class Principal2 extends JFrame {
 
     JPanel panelPrincipal;
-    PanelDibujo pd;
+    PanelDibujo2 pd;
     String nombreArchivo;
-    private Image userImg = new Image("/Imagenes/test.jpg");
-    
-    public Principal() {
+
+    public Principal2() {
 
         colocarSkin();
-
         panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BorderLayout());
 
@@ -45,17 +43,12 @@ public class Principal extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                /*
-                pd = new PanelDibujo(userImg);
-                panelPrincipal.repaint();
-                panelPrincipal.add(userImg);
-                */
                 JFileChooser selector = new JFileChooser();
                 int resultado = selector.showOpenDialog(null);
                 if (resultado == JFileChooser.APPROVE_OPTION) {
                     try {
                         nombreArchivo = selector.getSelectedFile().getName();
-                        pd = new PanelDibujo(ImageIO.read(selector.getSelectedFile()));
+                        pd = new PanelDibujo2(ImageIO.read(selector.getSelectedFile()));
                         pd.repaint();
                         repaint();
                         panelPrincipal.add(pd);
@@ -98,34 +91,10 @@ public class Principal extends JFrame {
     }
 
     public static void main(String arg[]) {
-        Principal p = new Principal();
+        Principal2 p = new Principal2();
         p.setVisible(true);
         p.setBounds(0, 0, 400, 470);
         p.setLocationRelativeTo(null);
         p.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-        public class Image extends JPanel {
-
-        String img = "recorte de test.jpg";
-
-        public Image(String img) {
-            this.setSize(179, 155);
-            this.img = img;
-        }
-
-        public Image() {
-            this.setSize(179, 155);
-        }
-
-        public void paint(Graphics grafico) {
-            Dimension height = getSize();
-            ImageIcon icon = new ImageIcon(getClass().getResource(this.img));
-            grafico.drawImage(icon.getImage(), 0, 0, height.width, height.height, null);
-            //grafico.drawImage(icon.getImage(), 0, 0, height.whidth, height.height, null);
-            setOpaque(false);
-            super.paintComponent(grafico);
-
-        }
-
     }
 }

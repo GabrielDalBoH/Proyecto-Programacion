@@ -47,15 +47,17 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
 
     @Override
     public void run() {
-
+        
         Webcam.addDiscoveryListener(this);
 
         setTitle("Java Webcam Capture POC");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-
+        setSize(500,500);
+        setLocationRelativeTo(null);
+        
         addWindowListener(this);
-
+        
         picker = new WebcamPicker();
         picker.addItemListener(this);
 
@@ -220,7 +222,7 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
         if (ev.getSource() == boton) {
             BufferedImage image = webcam.getImage();
             try {
-                ImageIO.write(image, "JPG", new File("test.jpg"));
+                ImageIO.write(image, "JPG", new File("src/Imagenes/test.jpg"));
                 System.out.println("Listo");
         }catch (IOException e1){
             
@@ -228,8 +230,6 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
         }}
                else if (ev.getSource() == botonVlv) {
                     dispose();
-                    IngresarDatos ventana = new IngresarDatos();
-                    ventana.setVisible(true);
         }
         // get image
 

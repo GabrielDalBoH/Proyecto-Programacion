@@ -9,6 +9,7 @@ import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.*;
 import net.sourceforge.jdatepicker.impl.*;
@@ -19,6 +20,8 @@ public class IngresarDatos extends javax.swing.JFrame {
     public IngresarDatos() {
         initComponents();
 
+        setLocationRelativeTo(null);
+        
         JComboBox pais = new JComboBox(this.paises());
 
     }
@@ -41,21 +44,24 @@ public class IngresarDatos extends javax.swing.JFrame {
         panelNombre = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
         panelFechaNacimiento = new javax.swing.JPanel();
-        date = new com.toedter.calendar.JDateChooser();
+        fechaMes = new com.toedter.calendar.JMonthChooser();
+        fechaAnio = new com.toedter.calendar.JYearChooser();
+        fechaDia = new com.toedter.calendar.JDayChooser();
         panelSexo1 = new javax.swing.JPanel();
-        btnHombre1 = new javax.swing.JRadioButton();
-        btnMujer1 = new javax.swing.JRadioButton();
+        btnHombre = new javax.swing.JRadioButton();
+        btnMujer = new javax.swing.JRadioButton();
         panelOtros = new javax.swing.JPanel();
         panelDomicilio = new javax.swing.JPanel();
         txtDomicilio = new javax.swing.JTextField();
         panelNacionalidad = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        boxNacionalidad = new javax.swing.JComboBox<>();
         panelLugarNacimiento = new javax.swing.JPanel();
         txtNacimiento = new javax.swing.JTextField();
         btnFirmar = new javax.swing.JButton();
         btnFoto = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
         btnRecorte = new javax.swing.JButton();
+        btnRecorteFirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Documento");
@@ -115,36 +121,43 @@ public class IngresarDatos extends javax.swing.JFrame {
         panelFechaNacimiento.setLayout(panelFechaNacimientoLayout);
         panelFechaNacimientoLayout.setHorizontalGroup(
             panelFechaNacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFechaNacimientoLayout.createSequentialGroup()
-                .addGap(216, 216, 216)
-                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFechaNacimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fechaMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(fechaDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(fechaAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         panelFechaNacimientoLayout.setVerticalGroup(
             panelFechaNacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFechaNacimientoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(panelFechaNacimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFechaNacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fechaMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechaAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechaDia, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelSexo1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sexo:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Noto Sans CJK JP Black", 0, 18))); // NOI18N
 
-        btnGrupo.add(btnHombre1);
-        btnHombre1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        btnHombre1.setText("Hombre");
-        btnHombre1.addActionListener(new java.awt.event.ActionListener() {
+        btnGrupo.add(btnHombre);
+        btnHombre.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        btnHombre.setText("Hombre");
+        btnHombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHombre1ActionPerformed(evt);
+                btnHombreActionPerformed(evt);
             }
         });
 
-        btnGrupo.add(btnMujer1);
-        btnMujer1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        btnMujer1.setText("Mujer");
-        btnMujer1.addActionListener(new java.awt.event.ActionListener() {
+        btnGrupo.add(btnMujer);
+        btnMujer.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        btnMujer.setText("Mujer");
+        btnMujer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMujer1ActionPerformed(evt);
+                btnMujerActionPerformed(evt);
             }
         });
 
@@ -154,17 +167,17 @@ public class IngresarDatos extends javax.swing.JFrame {
             panelSexo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSexo1Layout.createSequentialGroup()
                 .addGap(177, 177, 177)
-                .addComponent(btnHombre1)
+                .addComponent(btnHombre)
                 .addGap(75, 75, 75)
-                .addComponent(btnMujer1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(btnMujer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelSexo1Layout.setVerticalGroup(
             panelSexo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSexo1Layout.createSequentialGroup()
                 .addGroup(panelSexo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHombre1)
-                    .addComponent(btnMujer1))
+                    .addComponent(btnHombre)
+                    .addComponent(btnMujer))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -190,7 +203,7 @@ public class IngresarDatos extends javax.swing.JFrame {
                 .addComponent(panelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelSexo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(panelFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -211,7 +224,7 @@ public class IngresarDatos extends javax.swing.JFrame {
             panelDomicilioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDomicilioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                .addComponent(txtDomicilio)
                 .addContainerGap())
         );
         panelDomicilioLayout.setVerticalGroup(
@@ -223,9 +236,10 @@ public class IngresarDatos extends javax.swing.JFrame {
 
         panelNacionalidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nacionalidad:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Noto Sans CJK JP Black", 0, 18))); // NOI18N
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        boxNacionalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "    Afganistán", "    Albania", "    Alemania", "    Andorra", "    Angola", "    Antigua y Barbuda", "    Arabia Saudita", "    Argelia", "    Argentina", "    Armenia", "    Australia", "    Austria", "    Azerbaiyán", "    Bahamas", "    Bangladés", "    Barbados", "    Baréin", "    Bélgica", "    Belice", "    Benín", "    Bielorrusia", "    Birmania", "    Bolivia", "    Bosnia y Herzegovina", "    Botsuana", "    Brasil", "    Brunéi", "    Bulgaria", "    Burkina Faso", "    Burundi", "    Bután", "    Cabo Verde", "    Camboya", "    Camerún", "    Canadá", "    Catar", "    Chad", "    Chile", "    China", "    Chipre", "    Ciudad del Vaticano", "    Colombia", "    Comoras", "    Corea del Norte", "    Corea del Sur", "    Costa de Marfil", "    Costa Rica", "    Croacia", "    Cuba", "    Dinamarca", "    Dominica", "    Ecuador", "    Egipto", "    El Salvador", "    Emiratos Árabes Unidos", "    Eritrea", "    Eslovaquia", "    Eslovenia", "    España", "    Estados Unidos", "    Estonia", "    Etiopía", "    Filipinas", "    Finlandia", "    Fiyi", "    Francia", "    Gabón", "    Gambia", "    Georgia", "    Ghana", "    Granada", "    Grecia", "    Guatemala", "    Guyana", "    Guinea", "    Guinea ecuatorial", "    Guinea-Bisáu", "    Haití", "    Honduras", "    Hungría", "    India", "    Indonesia", "    Irak", "    Irán", "    Irlanda", "    Islandia", "    Islas Marshall", "    Islas Salomón", "    Israel", "    Italia", "    Jamaica", "    Japón", "    Jordania", "    Kazajistán", "    Kenia", "    Kirguistán", "    Kiribati", "    Kuwait", "    Laos", "    Lesoto", "    Letonia", "    Líbano", "    Liberia", "    Libia", "    Liechtenstein", "    Lituania", "    Luxemburgo", "    Madagascar", "    Malasia", "    Malaui", "    Maldivas", "    Malí", "    Malta", "    Marruecos", "    Mauricio", "    Mauritania", "    México", "    Micronesia", "    Moldavia", "    Mónaco", "    Mongolia", "    Montenegro", "    Mozambique", "    Namibia", "    Nauru", "    Nepal", "    Nicaragua", "    Níger", "    Nigeria", "    Noruega", "    Nueva Zelanda", "    Omán", "    Países Bajos", "    Pakistán", "    Palaos", "    Panamá", "    Papúa Nueva Guinea", "    Paraguay", "    Perú", "    Polonia", "    Portugal", "    Reino Unido", "    República Centroafricana", "    República Checa", "    República de Macedonia", "    República del Congo", "    República Democrática del Congo", "    República Dominicana", "    República Sudafricana", "    Ruanda", "    Rumanía", "    Rusia", "    Samoa", "    San Cristóbal y Nieves", "    San Marino", "    San Vicente y las Granadinas", "    Santa Lucía", "    Santo Tomé y Príncipe", "    Senegal", "    Serbia", "    Seychelles", "    Sierra Leona", "    Singapur", "    Siria", "    Somalia", "    Sri Lanka", "    Suazilandia", "    Sudán", "    Sudán del Sur", "    Suecia", "    Suiza", "    Surinam", "    Tailandia", "    Tanzania", "    Tayikistán", "    Timor Oriental", "    Togo", "    Tonga", "    Trinidad y Tobago", "    Túnez", "    Turkmenistán", "    Turquía", "    Tuvalu", "    Ucrania", "    Uganda", "    Uruguay", "    Uzbekistán", "    Vanuatu", "    Venezuela", "    Vietnam", "    Yemen", "    Yibuti", "    Zambia", "    Zimbabue" }));
+        boxNacionalidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                boxNacionalidadActionPerformed(evt);
             }
         });
 
@@ -234,14 +248,14 @@ public class IngresarDatos extends javax.swing.JFrame {
         panelNacionalidadLayout.setHorizontalGroup(
             panelNacionalidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNacionalidadLayout.createSequentialGroup()
-                .addGap(214, 214, 214)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(241, 241, 241)
+                .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         panelNacionalidadLayout.setVerticalGroup(
             panelNacionalidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNacionalidadLayout.createSequentialGroup()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -290,10 +304,17 @@ public class IngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        btnRecorte.setText("Recortar");
+        btnRecorte.setText("Recortar Foto");
         btnRecorte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecorteActionPerformed(evt);
+            }
+        });
+
+        btnRecorteFirmar.setText("Recortar Firma");
+        btnRecorteFirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecorteFirmarActionPerformed(evt);
             }
         });
 
@@ -302,22 +323,25 @@ public class IngresarDatos extends javax.swing.JFrame {
         panelOtrosLayout.setHorizontalGroup(
             panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOtrosLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelNacionalidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelLugarNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelOtrosLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelNacionalidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelLugarNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelOtrosLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRecorteFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(149, 149, 149)
+                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRecorte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOtrosLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRecorte, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70))
         );
         panelOtrosLayout.setVerticalGroup(
             panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,14 +352,22 @@ public class IngresarDatos extends javax.swing.JFrame {
                 .addComponent(panelNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelLugarNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFirmar)
-                    .addComponent(btnFoto)
-                    .addComponent(btnTerminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRecorte)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOtrosLayout.createSequentialGroup()
+                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelOtrosLayout.createSequentialGroup()
+                                .addComponent(btnFoto)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnRecorte))
+                            .addGroup(panelOtrosLayout.createSequentialGroup()
+                                .addComponent(btnFirmar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRecorteFirmar)))
+                        .addGap(86, 86, 86))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOtrosLayout.createSequentialGroup()
+                        .addComponent(btnTerminar)
+                        .addGap(101, 101, 101))))
         );
 
         jTabbedPane1.addTab("Otros", panelOtros);
@@ -381,58 +413,69 @@ public class IngresarDatos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void btnMujer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMujer1ActionPerformed
+    private void btnMujerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMujerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnMujer1ActionPerformed
+    }//GEN-LAST:event_btnMujerActionPerformed
 
-    private void btnHombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHombre1ActionPerformed
+    private void btnHombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnHombre1ActionPerformed
+    }//GEN-LAST:event_btnHombreActionPerformed
 
     private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDomicilioActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void boxNacionalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNacionalidadActionPerformed
         JComboBox pais = new JComboBox(paises());
-        jComboBox1.add(pais);
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        boxNacionalidad.add(pais);
+    }//GEN-LAST:event_boxNacionalidadActionPerformed
 
     private void txtNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNacimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNacimientoActionPerformed
 
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
-        dispose();
-        System.out.println("gola");
         SwingUtilities.invokeLater(new WebcamViewerExample());
     }//GEN-LAST:event_btnFotoActionPerformed
 
     private void btnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmarActionPerformed
-        dispose();
-        Firmar ventana = new Firmar();
-        ventana.setVisible(true);
 
+        SwingPaint n = new SwingPaint();
+        n.show();
+        
     }//GEN-LAST:event_btnFirmarActionPerformed
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         Persona persona = new Persona();
         persona.setNombre(txtNombre.getText());
         persona.setApellido(txtApellido.getText());
-        persona.setSexo(btnGrupo.getSelection().toString());
-        persona.setNacimiento(date.getDateFormatString());
+        
+        //ImageIcon img = new ImageIcon(getClass().getResource("Imagen/test.jpg"));
+        //ImageIcon icon = new ImagenIcon(test.get);
+        
+        btnHombre.setActionCommand("Hombre");
+        btnMujer.setActionCommand("Mujer");
+        
+        persona.setSexo(btnGrupo.getSelection().getActionCommand());
+        //persona.setNacimiento(date.getDate().toString());
         persona.setDomicilio(txtDomicilio.getText());
         persona.setCiudad(txtDomicilio.getText());
         persona.setLugarDeNacimiento(txtNacimiento.getText());
-        //persona.setNacionalidad(pais.getSelectedItem().toString()); 
+        persona.setNacionalidad(boxNacionalidad.getSelectedItem().toString());
+        
+        int dia = fechaDia.getDay();
+        int mes = fechaMes.getMonth();
+        int mess = mes + 1;
+        int anio = fechaAnio.getYear(); 
+        String str = dia + " / " + mess + " / " + anio;
+        persona.setNacimiento(str);
+
         this.dispose();
-        Dni ventana = new Dni();
+        Documento ventana = new Documento();
         ventana.setVisible(true);
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnRecorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecorteActionPerformed
-        dispose();
-        System.out.println("d");
 
         Principal p = new Principal();
         p.setVisible(true);
@@ -440,6 +483,14 @@ public class IngresarDatos extends javax.swing.JFrame {
         p.setLocationRelativeTo(null);
         p.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_btnRecorteActionPerformed
+
+    private void btnRecorteFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecorteFirmarActionPerformed
+        Principal2 p = new Principal2();
+        p.setVisible(true);
+        p.setBounds(0, 0, 400, 470);
+        p.setLocationRelativeTo(null);
+        p.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }//GEN-LAST:event_btnRecorteFirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -501,15 +552,18 @@ public class IngresarDatos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxNacionalidad;
     private javax.swing.JButton btnFirmar;
     private javax.swing.JButton btnFoto;
     private javax.swing.ButtonGroup btnGrupo;
-    private javax.swing.JRadioButton btnHombre1;
-    private javax.swing.JRadioButton btnMujer1;
+    private javax.swing.JRadioButton btnHombre;
+    private javax.swing.JRadioButton btnMujer;
     private javax.swing.JButton btnRecorte;
+    private javax.swing.JButton btnRecorteFirmar;
     private javax.swing.JButton btnTerminar;
-    private com.toedter.calendar.JDateChooser date;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private com.toedter.calendar.JYearChooser fechaAnio;
+    private com.toedter.calendar.JDayChooser fechaDia;
+    private com.toedter.calendar.JMonthChooser fechaMes;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelApellido;
     private javax.swing.JPanel panelDatos;

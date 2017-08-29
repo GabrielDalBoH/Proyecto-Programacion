@@ -5,6 +5,7 @@
  */
 package proyectoprogramacionii;
 
+
 import java.awt.*;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
@@ -18,7 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class PanelDibujo extends JPanel implements MouseMotionListener,MouseListener   {
+public class PanelDibujo2 extends JPanel implements MouseMotionListener,MouseListener   {
 
     Image img;
     BufferedImage Imagmemoria;
@@ -31,7 +32,7 @@ public class PanelDibujo extends JPanel implements MouseMotionListener,MouseList
     float ancho=0;
     float alto=0;
 
-    public PanelDibujo(BufferedImage f){
+    public PanelDibujo2(BufferedImage f){
         this.img = f;
         this.setSize(f.getWidth(),f.getHeight());
         this.setVisible(true);
@@ -48,7 +49,7 @@ public class PanelDibujo extends JPanel implements MouseMotionListener,MouseList
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2D.drawImage(img,0, 0, img.getWidth(this), img.getHeight(this), this);
         g2D.setStroke(new BasicStroke(2f));
-        g2D.setColor(Color.WHITE);
+        g2D.setColor(Color.BLACK);
         Rectangle2D r2 = new Rectangle2D.Float( x, y, ancho, alto );
         g2D.draw(r2);
         g2.drawImage(Imagmemoria, 0, 0, this);
@@ -57,7 +58,7 @@ public class PanelDibujo extends JPanel implements MouseMotionListener,MouseList
     public void guardar_imagen(String nombrearchivo){
      imgrecortada = ((BufferedImage) img).getSubimage((int)x,(int) y,(int) ancho,(int) alto) ;
         try {          
-            ImageIO.write(imgrecortada, "jpg", new File("src/Imagenes/recorte.jpg"));
+            ImageIO.write(imgrecortada, "jpg", new File("src/Imagenes/recorte firma.jpg"));
             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente la imagen recortada");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error, Trate nuevamente");
