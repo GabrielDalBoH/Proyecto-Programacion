@@ -6,14 +6,33 @@
 package proyectoprogramacionii;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import net.sourceforge.jdatepicker.impl.*;
 import net.sourceforge.jdatepicker.util.*;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 public class IngresarDatos extends javax.swing.JFrame {
 
@@ -311,7 +330,7 @@ public class IngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        btnRecorteFirmar.setText("Recortar Firma");
+        btnRecorteFirmar.setText("Recortar Foto");
         btnRecorteFirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecorteFirmarActionPerformed(evt);
@@ -367,7 +386,7 @@ public class IngresarDatos extends javax.swing.JFrame {
                         .addGap(86, 86, 86))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOtrosLayout.createSequentialGroup()
                         .addComponent(btnTerminar)
-                        .addGap(101, 101, 101))))
+                        .addGap(103, 103, 103))))
         );
 
         jTabbedPane1.addTab("Otros", panelOtros);
@@ -471,8 +490,75 @@ public class IngresarDatos extends javax.swing.JFrame {
         persona.setNacimiento(str);
 
         this.dispose();
-        Documento ventana = new Documento();
+        Documento ventana = new Documento(persona);
         ventana.setVisible(true);
+        
+        File archivo = new java.io.File("documento.xml");
+        System.out.println(archivo.exists());
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = null;
+        try {
+            builder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(IngresarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DOMImplementation implementation = builder.getDOMImplementation();
+        Document document = null;
+        try {
+            document = builder.parse("dibujo.xml");
+        } catch (SAXException ex) {
+            Logger.getLogger(IngresarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(IngresarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Element raiz = document.getDocumentElement();  
+        System.out.println(document);
+        Node nombre = document.getElementsByTagName("text").item(0).getFirstChild();
+        Node apellido = document.getElementsByTagName("text").item(1).getFirstChild();
+        Node fechanacimiento = document.getElementsByTagName("text").item(2).getFirstChild();
+        Node sexo = document.getElementsByTagName("text").item(3).getFirstChild();
+        Node domicilio = document.getElementsByTagName("text").item(4).getFirstChild();
+        Node nacionalidad = document.getElementsByTagName("text").item(5).getFirstChild();
+        Node lugarnacimiento = document.getElementsByTagName("text").item(6).getFirstChild();
+
+        
+        if (nombre != null){
+            nombre.setTextContent(persona.getNombre());
+
+        }
+        if (apellido != null){
+            apellido.setTextContent(persona.getApellido());
+        }
+        if (fechanacimiento != null){
+            fechanacimiento.setTextContent(persona.getNacimiento());
+        }
+        if (sexo != null){
+            sexo.setTextContent(persona.getSexo());
+        }
+        if (domicilio != null){
+            domicilio.setTextContent(persona.getDomicilio());
+        }
+        if (nacionalidad != null){
+            nacionalidad.setTextContent(persona.getNacionalidad());
+        }                                                
+        if (lugarnacimiento != null){
+            lugarnacimiento.setTextContent(persona.getLugarDeNacimiento());
+        }        
+        //Generate XML
+        Source source = new DOMSource(document);
+        //Indicamos donde lo queremos almacenar
+        Result result = new StreamResult(new java.io.File("dibujo.xml")); //nombre del archivo
+        Transformer transformer = null;
+        try {
+            transformer = TransformerFactory.newInstance().newTransformer();
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(IngresarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            transformer.transform(source, result);
+        } catch (TransformerException ex) {
+            Logger.getLogger(IngresarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnRecorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecorteActionPerformed

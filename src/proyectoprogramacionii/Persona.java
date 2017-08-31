@@ -10,14 +10,14 @@ package proyectoprogramacionii;
  * @author gino
  */
 public class Persona {
-    private static String nombre_;
-    private static String apellido_;
-    private static String nacimiento_;
-    private static String sexo_;
-    private static String domicilio_;
-    private static String nacionalidad_;
-    private static String ciudad_;
-    private static String lugardenacimiento_;
+    private  String nombre_;
+    private  String apellido_;
+    private  String nacimiento_;
+    private  String sexo_;
+    private  String domicilio_;
+    private  String nacionalidad_;
+    private  String ciudad_;
+    private  String lugardenacimiento_;
     
     
     
@@ -26,7 +26,7 @@ public class Persona {
         this.nombre_ = nombre_;
     }
 
-    public static String getNombre() {
+    public  String getNombre() {
         return nombre_;
     }
 
@@ -34,7 +34,7 @@ public class Persona {
         this.apellido_ = apellido_;
     }
 
-    public static String getApellido() {
+    public  String getApellido() {
         return apellido_;
     }
 
@@ -42,42 +42,46 @@ public class Persona {
         this.sexo_ = sexo_;
     }
 
-    public static String getSexo() {
+    public  String getSexo() {
         return sexo_;
     }
     public void setNacimiento(String nacimiento_) {
         this.nacimiento_ = nacimiento_;
     }
 
-    public static String getNacimiento() {
+    public  String getNacimiento() {
         return nacimiento_;
     }
     public void setDomicilio(String domicilio_) {
         this.domicilio_ = domicilio_;
     }
 
-    public static String getDomicilio() {
+    public String getDomicilio() {
         return domicilio_;
     }
     public void setCiudad(String ciudad_) {
         this.ciudad_ = ciudad_;
     }
 
-    public static String getCiudad() {
+    public  String getCiudad() {
         return ciudad_;
     }
     public void setLugarDeNacimiento(String lugardenacimiento_) {
         this.lugardenacimiento_ = lugardenacimiento_;
     }
 
-    public static String getLugarDeNacimiento() {
+    public  String getLugarDeNacimiento() {
         return lugardenacimiento_;
     }
     public void setNacionalidad(String nacionalidad_) {
-        this.nacionalidad_ = nacionalidad_;
+        String nacionalidad = "";
+        for (int i = 4 ; i < nacionalidad_.length(); i++){
+            nacionalidad += nacionalidad_.charAt(i);
+        }
+        this.nacionalidad_ = nacionalidad;
     }
 
-    public static String getNacionalidad() {
+    public  String getNacionalidad() {
         return nacionalidad_;
 }
 }

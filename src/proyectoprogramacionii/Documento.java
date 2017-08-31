@@ -21,7 +21,7 @@ public class Documento extends javax.swing.JFrame {
     private Image userImg = new Image("/Imagenes/recorte.jpg");
     private Image userImg2 = new Image("/Imagenes/recorte firma.jpg");
 
-    public Documento() {
+    public Documento(Persona persona) {
         initComponents();
         setLocationRelativeTo(null);
         //ImageIcon img = new ImageIcon(getClass().getResource("/Imagen/test.jpg"));
@@ -61,13 +61,13 @@ public class Documento extends javax.swing.JFrame {
         String numFinal = "" + num + num2 + " . " + num3 + num4 + num5+ " . " + num6 + num7 + num8;
         lblDni.setText(numFinal);
 
-        lblNombre.setText(Persona.getNombre());
-        lblApellido.setText(Persona.getApellido());
-        lblSexo.setText(Persona.getSexo());
-        lblFechaDeNacimiento.setText(Persona.getNacimiento());
-        lblDomicilio.setText(Persona.getDomicilio());
-        lblNacionalidad.setText(Persona.getNacionalidad());
-        lblLugarNacimiento.setText(Persona.getLugarDeNacimiento());
+        lblNombre.setText(persona.getNombre());
+        lblApellido.setText(persona.getApellido());
+        lblSexo.setText(persona.getSexo());
+        lblFechaDeNacimiento.setText(persona.getNacimiento());
+        lblDomicilio.setText(persona.getDomicilio());
+        lblNacionalidad.setText(persona.getNacionalidad());
+        lblLugarNacimiento.setText(persona.getLugarDeNacimiento());
 
         lblFoto.add(userImg);
         lblFirma.add(userImg2);
@@ -346,40 +346,6 @@ public class Documento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Documento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Documento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Documento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Documento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Documento().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
