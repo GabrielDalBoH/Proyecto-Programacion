@@ -20,7 +20,7 @@ public class Principal extends JFrame {
     JPanel panelPrincipal;
     PanelDibujo pd;
     String nombreArchivo;
-    private Image userImg = new Image("/Imagenes/test.jpg");
+    private Image img = new Image("/Imagenes/test.jpg");
     
     public Principal() {
 
@@ -50,6 +50,7 @@ public class Principal extends JFrame {
                 panelPrincipal.repaint();
                 panelPrincipal.add(userImg);
                 */
+                /*
                 JFileChooser selector = new JFileChooser();
                 int resultado = selector.showOpenDialog(null);
                 if (resultado == JFileChooser.APPROVE_OPTION) {
@@ -64,7 +65,10 @@ public class Principal extends JFrame {
                         e.printStackTrace();
                     }
                 }
-            
+            */
+                PanelDibujo pd = new PanelDibujo();       
+                pd.add(img);
+                panelPrincipal.add(pd);
             }
         });
         JMenuItem recortar = new JMenuItem("Recortar");

@@ -59,6 +59,7 @@ public class PanelDibujo2 extends JPanel implements MouseMotionListener,MouseLis
      imgrecortada = ((BufferedImage) img).getSubimage((int)x,(int) y,(int) ancho,(int) alto) ;
         try {          
             ImageIO.write(imgrecortada, "jpg", new File("src/Imagenes/recorte firma.jpg"));
+            ImageIO.write(imgrecortada, "png", new File("recorte firma.png"));
             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente la imagen recortada");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error, Trate nuevamente");

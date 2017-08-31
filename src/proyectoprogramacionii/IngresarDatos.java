@@ -7,10 +7,13 @@ package proyectoprogramacionii;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -36,11 +39,12 @@ import org.xml.sax.SAXException;
 
 public class IngresarDatos extends javax.swing.JFrame {
 
+
     public IngresarDatos() {
         initComponents();
 
         setLocationRelativeTo(null);
-        
+
         JComboBox pais = new JComboBox(this.paises());
 
     }
@@ -461,38 +465,37 @@ public class IngresarDatos extends javax.swing.JFrame {
 
         SwingPaint n = new SwingPaint();
         n.show();
-        
+
     }//GEN-LAST:event_btnFirmarActionPerformed
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
         Persona persona = new Persona();
         persona.setNombre(txtNombre.getText());
         persona.setApellido(txtApellido.getText());
-        
         //ImageIcon img = new ImageIcon(getClass().getResource("Imagen/test.jpg"));
         //ImageIcon icon = new ImagenIcon(test.get);
-        
+
         btnHombre.setActionCommand("Hombre");
         btnMujer.setActionCommand("Mujer");
-        
+
         persona.setSexo(btnGrupo.getSelection().getActionCommand());
         //persona.setNacimiento(date.getDate().toString());
         persona.setDomicilio(txtDomicilio.getText());
         persona.setCiudad(txtDomicilio.getText());
         persona.setLugarDeNacimiento(txtNacimiento.getText());
         persona.setNacionalidad(boxNacionalidad.getSelectedItem().toString());
-        
+
         int dia = fechaDia.getDay();
         int mes = fechaMes.getMonth();
         int mess = mes + 1;
-        int anio = fechaAnio.getYear(); 
+        int anio = fechaAnio.getYear();
         String str = dia + " / " + mess + " / " + anio;
         persona.setNacimiento(str);
 
         this.dispose();
         Documento ventana = new Documento(persona);
         ventana.setVisible(true);
-        
+
         File archivo = new java.io.File("documento.xml");
         System.out.println(archivo.exists());
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -520,30 +523,34 @@ public class IngresarDatos extends javax.swing.JFrame {
         Node domicilio = document.getElementsByTagName("text").item(4).getFirstChild();
         Node nacionalidad = document.getElementsByTagName("text").item(5).getFirstChild();
         Node lugarnacimiento = document.getElementsByTagName("text").item(6).getFirstChild();
+        Node foto = document.getElementsByTagName("svg").item(0).getFirstChild();
+        Node firma = document.getElementsByTagName("svg").item(1).getFirstChild();
 
         
-        if (nombre != null){
+        
+        if (nombre != null) {
             nombre.setTextContent(persona.getNombre());
 
         }
-        if (apellido != null){
+        if (apellido != null) {
             apellido.setTextContent(persona.getApellido());
         }
-        if (fechanacimiento != null){
+        if (fechanacimiento != null) {
             fechanacimiento.setTextContent(persona.getNacimiento());
         }
-        if (sexo != null){
+        if (sexo != null) {
             sexo.setTextContent(persona.getSexo());
         }
-        if (domicilio != null){
+        if (domicilio != null) {
             domicilio.setTextContent(persona.getDomicilio());
         }
-        if (nacionalidad != null){
+        if (nacionalidad != null) {
             nacionalidad.setTextContent(persona.getNacionalidad());
-        }                                                
-        if (lugarnacimiento != null){
+        }
+        if (lugarnacimiento != null) {
             lugarnacimiento.setTextContent(persona.getLugarDeNacimiento());
-        }        
+        }
+
         //Generate XML
         Source source = new DOMSource(document);
         //Indicamos donde lo queremos almacenar
@@ -666,4 +673,5 @@ public class IngresarDatos extends javax.swing.JFrame {
     private javax.swing.JTextField txtNacimiento;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
 }

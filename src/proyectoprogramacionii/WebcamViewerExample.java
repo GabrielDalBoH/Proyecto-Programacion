@@ -223,6 +223,7 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
             BufferedImage image = webcam.getImage();
             try {
                 ImageIO.write(image, "JPG", new File("src/Imagenes/test.jpg"));
+                //ImageIO.write(image, "PNG", new File("test.jpg"));
                 System.out.println("Listo");
         }catch (IOException e1){
             
