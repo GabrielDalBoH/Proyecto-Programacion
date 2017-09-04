@@ -30,9 +30,6 @@ public class PanelDibujo extends JPanel implements MouseMotionListener,MouseList
     float y=0;
     float ancho=0;
     float alto=0;
-    public PanelDibujo() {
-    }
-
 
     public PanelDibujo(BufferedImage f){
         this.img = f;
@@ -41,7 +38,6 @@ public class PanelDibujo extends JPanel implements MouseMotionListener,MouseList
         addMouseMotionListener(this);
         addMouseListener(this);
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -62,7 +58,7 @@ public class PanelDibujo extends JPanel implements MouseMotionListener,MouseList
      imgrecortada = ((BufferedImage) img).getSubimage((int)x,(int) y,(int) ancho,(int) alto) ;
         try {          
             ImageIO.write(imgrecortada, "jpg", new File("src/Imagenes/recorte.jpg"));
-            ImageIO.write(imgrecortada, "png", new File("recorte.png"));
+            ImageIO.write(imgrecortada, "png", new File("recorte foto.png"));
             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente la imagen recortada");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error, Trate nuevamente");

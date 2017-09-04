@@ -44,6 +44,7 @@ public class Principal2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 JFileChooser selector = new JFileChooser();
+                JOptionPane.showMessageDialog(null, "Pegar el URL cuando se le abra el buscador");
                 int resultado = selector.showOpenDialog(null);
                 if (resultado == JFileChooser.APPROVE_OPTION) {
                     try {

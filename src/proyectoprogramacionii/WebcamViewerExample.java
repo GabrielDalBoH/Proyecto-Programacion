@@ -40,24 +40,24 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
     private Webcam webcam = null;
     private WebcamPanel panel = null;
     private WebcamPicker picker = null;
-    JPanel layout = new JPanel(new GridLayout(1,2,1,1));
-    
+    JPanel layout = new JPanel(new GridLayout(1, 2, 1, 1));
+
     private JButton boton = new JButton("Sacar foto");
     private JButton botonVlv = new JButton("Volver");
 
     @Override
     public void run() {
-        
+
         Webcam.addDiscoveryListener(this);
 
         setTitle("Java Webcam Capture POC");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        setSize(500,500);
+        setSize(500, 500);
         setLocationRelativeTo(null);
-        
+
         addWindowListener(this);
-        
+
         picker = new WebcamPicker();
         picker.addItemListener(this);
 
@@ -80,8 +80,7 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
         add(panel, BorderLayout.CENTER);
         add(layout, BorderLayout.SOUTH);
         boton.addActionListener(this);
-        
-        
+
         botonVlv.setActionCommand("Volver");
         botonVlv.addActionListener(this);
 
@@ -225,12 +224,12 @@ public class WebcamViewerExample extends JFrame implements ActionListener, Runna
                 ImageIO.write(image, "JPG", new File("src/Imagenes/test.jpg"));
                 //ImageIO.write(image, "PNG", new File("test.jpg"));
                 System.out.println("Listo");
-        }catch (IOException e1){
-            
-            e1.printStackTrace();
-        }}
-               else if (ev.getSource() == botonVlv) {
-                    dispose();
+            } catch (IOException e1) {
+
+                e1.printStackTrace();
+            }
+        } else if (ev.getSource() == botonVlv) {
+            dispose();
         }
         // get image
 

@@ -6,13 +6,12 @@
 package proyectoprogramacionii;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Principal extends JFrame {
@@ -20,12 +19,10 @@ public class Principal extends JFrame {
     JPanel panelPrincipal;
     PanelDibujo pd;
     String nombreArchivo;
-    private Image img = new Image("/Imagenes/test.jpg");
-    
+
     public Principal() {
 
         colocarSkin();
-
         panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BorderLayout());
 
@@ -45,13 +42,8 @@ public class Principal extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                /*
-                pd = new PanelDibujo(userImg);
-                panelPrincipal.repaint();
-                panelPrincipal.add(userImg);
-                */
-                /*
                 JFileChooser selector = new JFileChooser();
+                JOptionPane.showMessageDialog(null, "Pegar el URL cuando se le abra el buscador");
                 int resultado = selector.showOpenDialog(null);
                 if (resultado == JFileChooser.APPROVE_OPTION) {
                     try {
@@ -65,10 +57,7 @@ public class Principal extends JFrame {
                         e.printStackTrace();
                     }
                 }
-            */
-                PanelDibujo pd = new PanelDibujo();       
-                pd.add(img);
-                panelPrincipal.add(pd);
+
             }
         });
         JMenuItem recortar = new JMenuItem("Recortar");
@@ -107,29 +96,5 @@ public class Principal extends JFrame {
         p.setBounds(0, 0, 400, 470);
         p.setLocationRelativeTo(null);
         p.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-        public class Image extends JPanel {
-
-        String img = "recorte de test.jpg";
-
-        public Image(String img) {
-            this.setSize(179, 155);
-            this.img = img;
-        }
-
-        public Image() {
-            this.setSize(179, 155);
-        }
-
-        public void paint(Graphics grafico) {
-            Dimension height = getSize();
-            ImageIcon icon = new ImageIcon(getClass().getResource(this.img));
-            grafico.drawImage(icon.getImage(), 0, 0, height.width, height.height, null);
-            //grafico.drawImage(icon.getImage(), 0, 0, height.whidth, height.height, null);
-            setOpaque(false);
-            super.paintComponent(grafico);
-
-        }
-
     }
 }

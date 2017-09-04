@@ -6,6 +6,8 @@
 package proyectoprogramacionii;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,7 +20,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.management.Notification;
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,14 +43,15 @@ import org.xml.sax.SAXException;
 
 public class IngresarDatos extends javax.swing.JFrame {
 
-
     public IngresarDatos() {
         initComponents();
 
         setLocationRelativeTo(null);
 
-        JComboBox pais = new JComboBox(this.paises());
-
+        btnRecorteFirmar.setEnabled(false);
+        btnRecorte.setEnabled(false);
+        btnUrlFoto.setEnabled(false);
+        btnUrlFirma.setEnabled(false);
     }
 
     /**
@@ -85,6 +90,8 @@ public class IngresarDatos extends javax.swing.JFrame {
         btnTerminar = new javax.swing.JButton();
         btnRecorte = new javax.swing.JButton();
         btnRecorteFirmar = new javax.swing.JButton();
+        btnUrlFoto = new javax.swing.JButton();
+        btnUrlFirma = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Documento");
@@ -334,10 +341,24 @@ public class IngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        btnRecorteFirmar.setText("Recortar Foto");
+        btnRecorteFirmar.setText("Recortar Firma");
         btnRecorteFirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecorteFirmarActionPerformed(evt);
+            }
+        });
+
+        btnUrlFoto.setText("Copiar URL Foto");
+        btnUrlFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUrlFotoActionPerformed(evt);
+            }
+        });
+
+        btnUrlFirma.setText("Copiar URL Firma");
+        btnUrlFirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUrlFirmaActionPerformed(evt);
             }
         });
 
@@ -346,24 +367,30 @@ public class IngresarDatos extends javax.swing.JFrame {
         panelOtrosLayout.setHorizontalGroup(
             panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOtrosLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelOtrosLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelOtrosLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRecorteFirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUrlFirma, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                         .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelNacionalidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelLugarNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelOtrosLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRecorteFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(149, 149, 149)
-                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRecorte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelOtrosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(142, 142, 142))
+                            .addGroup(panelOtrosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnUrlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                    .addComponent(btnRecorte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelNacionalidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelLugarNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelOtrosLayout.setVerticalGroup(
@@ -381,13 +408,17 @@ public class IngresarDatos extends javax.swing.JFrame {
                         .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelOtrosLayout.createSequentialGroup()
                                 .addComponent(btnFoto)
-                                .addGap(10, 10, 10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnRecorte))
                             .addGroup(panelOtrosLayout.createSequentialGroup()
                                 .addComponent(btnFirmar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnRecorteFirmar)))
-                        .addGap(86, 86, 86))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelOtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUrlFoto)
+                            .addComponent(btnUrlFirma))
+                        .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOtrosLayout.createSequentialGroup()
                         .addComponent(btnTerminar)
                         .addGap(103, 103, 103))))
@@ -458,11 +489,13 @@ public class IngresarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNacimientoActionPerformed
 
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
+        btnUrlFoto.setEnabled(true);
+        
         SwingUtilities.invokeLater(new WebcamViewerExample());
     }//GEN-LAST:event_btnFotoActionPerformed
 
     private void btnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmarActionPerformed
-
+        btnUrlFirma.setEnabled(true);
         SwingPaint n = new SwingPaint();
         n.show();
 
@@ -526,8 +559,6 @@ public class IngresarDatos extends javax.swing.JFrame {
         Node foto = document.getElementsByTagName("svg").item(0).getFirstChild();
         Node firma = document.getElementsByTagName("svg").item(1).getFirstChild();
 
-        
-        
         if (nombre != null) {
             nombre.setTextContent(persona.getNombre());
 
@@ -584,6 +615,16 @@ public class IngresarDatos extends javax.swing.JFrame {
         p.setLocationRelativeTo(null);
         p.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_btnRecorteFirmarActionPerformed
+
+    private void btnUrlFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrlFotoActionPerformed
+        btnRecorte.setEnabled(true);
+        copiarURLfoto();
+    }//GEN-LAST:event_btnUrlFotoActionPerformed
+
+    private void btnUrlFirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrlFirmaActionPerformed
+        btnRecorteFirmar.setEnabled(true);
+        copiarURLfirma();
+    }//GEN-LAST:event_btnUrlFirmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -654,6 +695,8 @@ public class IngresarDatos extends javax.swing.JFrame {
     private javax.swing.JButton btnRecorte;
     private javax.swing.JButton btnRecorteFirmar;
     private javax.swing.JButton btnTerminar;
+    private javax.swing.JButton btnUrlFirma;
+    private javax.swing.JButton btnUrlFoto;
     private com.toedter.calendar.JYearChooser fechaAnio;
     private com.toedter.calendar.JDayChooser fechaDia;
     private com.toedter.calendar.JMonthChooser fechaMes;
@@ -673,5 +716,17 @@ public class IngresarDatos extends javax.swing.JFrame {
     private javax.swing.JTextField txtNacimiento;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void copiarURLfoto() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection data = new StringSelection("/home/gino/NetBeansProjects/ProyectoProgramacionII/src/Imagenes/test.jpg");
+        clipboard.setContents(data, data);
+    }
+
+    public void copiarURLfirma() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection data = new StringSelection("/home/gino/NetBeansProjects/ProyectoProgramacionII/src/Imagenes/firma.jpg");
+        clipboard.setContents(data, data);
+    }
 
 }
